@@ -1,0 +1,44 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Szyfr</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="szyfrcezara">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Szyfr Cezara
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="szyfrpolibiusza">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Szyfr Polibiusza
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="szyfrtrithemiusa">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Szyfr Trithemiusa
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="szyfrvigenera">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Szyfr Vigenera
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

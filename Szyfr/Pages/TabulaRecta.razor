@@ -1,0 +1,25 @@
+﻿<table class="table-recta">
+    <thead>
+        <tr>
+            <th></th>
+            @for (int i = 0; i < SzyfrLib.TabulaRecta.GetLength(1); i++)
+            {
+                <th>@SzyfrLib.AllowedChars[i]</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (int row = 0; row < SzyfrLib.TabulaRecta.GetLength(0); row++)
+        {
+            <tr>
+                <th>@SzyfrLib.AllowedChars[row]</th>
+                @for (int col = 0; col < SzyfrLib.TabulaRecta.GetLength(1); col++)
+                {
+                    <td>
+                        @SzyfrLib.TabulaRecta[row, col]
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

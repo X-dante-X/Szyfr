@@ -1,0 +1,80 @@
+.content-x {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.content-element {
+  width: 50%;
+}
+.content-element h2 {
+  text-align: center;
+}
+
+.content-element-x {
+  margin-top: 3rem;
+}
+
+.tabula-recta {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.table-recta {
+  border-collapse: collapse;
+  font-size: 80%;
+}
+.table-recta th, .table-recta td {
+  text-align: center;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.table-recta th {
+  font-weight: 800;
+  font-size: 90%;
+}
+.table-recta tbody td {
+  border: 1px solid black;
+}
+
+.checkboard-container {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 3rem;
+}
+.checkboard-container .checkboard {
+  border-collapse: collapse;
+  margin-bottom: 3rem;
+}
+.checkboard-container .checkboard th, .checkboard-container .checkboard td {
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+.checkboard-container .checkboard th {
+  font-weight: 800;
+}
+.checkboard-container .checkboard tbody th, .checkboard-container .checkboard tbody td, .checkboard-container .checkboard thead th, .checkboard-container .checkboard thead td {
+  border: 1px solid black;
+}

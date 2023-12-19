@@ -1,0 +1,204 @@
+﻿@page "/szyfrpolibiusza"
+
+<PageTitle>Szyfr Polibiusza</PageTitle>
+
+<h1>Szyfr Polibiusza</h1>
+
+<div class="content-x">
+    <div class="content-element">
+        <div class="content-element-x">
+            <h2>Szyfrator</h2>
+            <div class="mb-3">
+                <label for="Plaintext">Text Jawny</label>
+                <input class="form-control" id="Plaintext" @bind="Plaintext" />
+            </div>
+            <div class="mb-3">
+                <label for="Hard">Matematyczne utrudnienie szyfru</label>
+                <input class="form-check" type="checkbox" id="Hard" @bind="Hard" />
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="Encrypt">Szyfruj</button>
+            </div>
+            <div class="mb-3">
+                <p>Text zaszyfrowany: @Ciphertext</p>
+            </div>
+        </div>
+        <div class="content-element-x">
+            <h2>Deszyfrator</h2>
+            <div class="mb-3">
+                <label for="Ciphertext">Text Zaszyfrowany</label>
+                <input class="form-control" id="Ciphertext" @bind="Ciphertext" />
+            </div>
+            <div class="mb-3">
+                <label for="Hard">Matematyczne utrudnienie szyfru</label>
+                <input class="form-check" type="checkbox" id="Hard" @bind="Hard" />
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="Decrypt">Deszyfruj</button>
+            </div>
+            <div class="mb-3">
+                <p>Text deszyfrowany: @Plaintext</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-element">
+        <h2>Szachownica Polibiusza</h2>
+        <div class="mb-3 checkboard-container">
+            <table class="checkboard">
+                <thead>
+                    <tr>
+                        <th></th>
+                        @for (int col = 1; col <= Square.GetLength(1); col++)
+                        {
+                            <th>@col</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int row = 0; row < Square.GetLength(0); row++)
+                    {
+                        <tr>
+                            <th>@(row + 1)</th>
+                            @for (int col = 0; col < Square.GetLength(1); col++)
+                            {
+                                <td>
+                                    @Square[row, col]
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="FillSquare" type="submit">Zgeneruj</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    public string Plaintext { get; set; } = "";
+    public string Ciphertext { get; set; } = "";
+    public bool Hard { get; set; } = false;
+    public char[,] Square { get; set; } = new char[5, 7];
+    private Random random = new Random();
+
+
+    public void Encrypt()
+    {
+        string encryptedString = "";
+        string cleanedString = SzyfrLib.ClearString(Plaintext);
+
+        foreach (char c in cleanedString)
+        {
+            for (int i = 0; i < Square.GetLength(0); i++)
+            {
+                for (int j = 0; j < Square.GetLength(1); j++)
+                {
+                    if (Square[i, j] == c)
+                    {
+                        encryptedString += (i + 1).ToString() + (j + 1).ToString();
+                        break;
+                    }
+                }
+            }
+        }
+        if (Hard)
+            encryptedString = EncryptHard(encryptedString);
+
+
+        Ciphertext = encryptedString;
+    }
+
+    public void Decrypt()
+    {
+        string decryptedString = "";
+        string cleanedString = SzyfrLib.ClearStringNum(Ciphertext);
+        if (cleanedString.Length % 2 == 1)
+            //Plaintext = "Tekst zaszyfrowany nie może mieć nieparzystej liczby znaków.";
+            return;
+
+        for (int i = 0; i < cleanedString.Length; i += 2)
+        {
+            int index1 = int.Parse(cleanedString[i].ToString()) - 1;
+            int index2 = int.Parse(cleanedString[i + 1].ToString()) - 1;
+            if (Hard)
+                (index1, index2) = DecryptHard(index1, index2, i);
+            decryptedString += Square[index1, index2];
+        }
+
+
+        Plaintext = decryptedString;
+    }
+
+    public void FillSquare()
+    {
+        var square = new char[5, 7];
+        var chars = ShuffleCharArray(SzyfrLib.AllowedChars.ToArray());
+
+        int charIndex = 0;
+
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 7; j++)
+            {
+                if (charIndex < chars.Length)
+                {
+                    square[i, j] = chars[charIndex];
+                    charIndex++;
+                }
+            }
+        }
+        Square = square;
+    }
+
+    private char[] ShuffleCharArray(char[] c)
+    {
+
+        for (int i = c.Length - 1; i > 0; i--)
+        {
+            int j = random.Next(0, i + 1);
+            char temp = c[i];
+            c[i] = c[j];
+            c[j] = temp;
+        }
+        return c;
+    }
+
+    private string EncryptHard(string s)
+    {
+        string encryptedString = "";
+        for (int i = 0; i < s.Length; i += 2)
+        {
+            if (IsPrimeNumber(i / 2))
+                encryptedString += $"{s[i + 1]}{s[i]}";
+            else
+                encryptedString += $"{s[i]}{s[i + 1]}";
+        }
+        return encryptedString;
+    }
+
+    private (int, int) DecryptHard(int index1, int index2, int i)
+    {
+        if (IsPrimeNumber(i / 2))
+            return (index2, index1);
+
+        return (index1, index2);
+    }
+
+    private bool IsPrimeNumber(int n)
+    {
+        if (n < 2)
+            return false;
+
+        for (int i = 2; i <= Math.Sqrt(n); i++)
+        {
+            if (n % i == 0)
+                return false;
+        }
+
+        return true;
+    }
+}

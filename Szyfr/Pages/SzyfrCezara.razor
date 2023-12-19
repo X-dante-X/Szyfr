@@ -1,0 +1,87 @@
+﻿@page "/szyfrcezara"
+
+<PageTitle>Szyfr Cezara</PageTitle>
+        <h1>Szyfr Cezara</h1>
+<div class="content-x">
+    <div class="content-element">
+        <div class="content-element-x">
+            <h2>Szyfrator</h2>
+            <div class="mb-3">
+                <label for="Plaintext">Text Jawny</label>
+                <input class="form-control" id="Plaintext" @bind="Plaintext" />
+            </div>
+            <div class="mb-3">
+                <label for="Key">Klucz</label>
+                <select class="form-control" id="Key" @bind="Key">
+                    @for (int i = 1; i <= SzyfrLib.Len; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="Encrypt">Szyfruj</button>
+            </div>
+
+            <div class="mb-3">
+                <p>Text zaszyfrowany: @Ciphertext</p>
+            </div>
+        </div>
+
+        <div class="content-element-x">
+            <h2>Deszyfrator</h2>
+            <div class="mb-3">
+                <label for="Ciphertext">Text Zaszyfrowany</label>
+                <input class="form-control" id="Ciphertext" @bind="Ciphertext" />
+            </div>
+            <div class="mb-3">
+                <label for="Key">Klucz</label>
+                <select class="form-control" id="Key" @bind="Key">
+                    @for (int i = 1; i <= SzyfrLib.Len; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="Decrypt">Deszyfruj</button>
+            </div>
+            <div class="mb-3">
+                <p>Text Jawny: @Plaintext</p>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    public int Key { get; set; } = 1;
+    public string Plaintext { get; set; } = "";
+    public string Ciphertext { get; set; } = "";
+
+    public void Encrypt()
+    {
+        string encryptedString = "";
+        string cleanedString = SzyfrLib.ClearString(Plaintext);
+
+        foreach (char c in cleanedString)
+        {
+            int index = (Array.IndexOf(SzyfrLib.AllowedChars, c) + Key) % SzyfrLib.Len;
+            encryptedString += SzyfrLib.AllowedChars[index];
+        }
+
+        Ciphertext = encryptedString;
+    }
+
+    public void Decrypt()
+    {
+        string decryptedString = "";
+        string cleanedString = SzyfrLib.ClearString(Ciphertext);
+
+        foreach (char c in cleanedString)
+        {
+            int index = (Array.IndexOf(SzyfrLib.AllowedChars, c) - Key + SzyfrLib.Len) % SzyfrLib.Len;
+            decryptedString += SzyfrLib.AllowedChars[index];
+        }
+
+        Plaintext = decryptedString;
+    }
+}

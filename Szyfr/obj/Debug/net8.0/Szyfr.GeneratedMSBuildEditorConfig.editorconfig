@@ -1,0 +1,63 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = Szyfr
+build_property.RootNamespace = Szyfr
+build_property.ProjectDir = D:\Projects\Back-end\Real project(C#)\Szyfr\Szyfr\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Projects\Back-end\Real project(C#)\Szyfr\Szyfr
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Pages/SzyfrCezara.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3p5ZnJDZXphcmEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Pages/SzyfrPolibiusza.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3p5ZnJQb2xpYml1c3phLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Pages/SzyfrTrithemiusa.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3p5ZnJUcml0aGVtaXVzYS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Pages/SzyfrVigenera.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3p5ZnJWaWdlbmVyYS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Pages/TabulaRecta.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFidWxhUmVjdGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-33emnbvqdq
+
+[D:/Projects/Back-end/Real project(C\#)/Szyfr/Szyfr/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-gotbs2wmqb

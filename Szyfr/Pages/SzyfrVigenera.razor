@@ -1,0 +1,109 @@
+﻿@page "/szyfrvigenera"
+
+<PageTitle>Szyfr Vigenera</PageTitle>
+
+<h1>Szyfr Vigenera</h1>
+<div class="content-x">
+    <div class="content-element">
+        <div class="content-element-x">
+            <h2>Szyfrator</h2>
+            <div class="mb-3">
+                <label for="Plaintext">Text Jawny</label>
+                <input class="form-control" id="Plaintext" @bind="Plaintext" />
+            </div>
+            <div class="mb-3">
+                <label for="KeyWord">Slowo klucz</label>
+                <input class="form-control" id="KeyWord" @bind="KeyWord" />
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="Encrypt">Szyfruj</button>
+            </div>
+            <div class="mb-3">
+                <p>Text zaszyfrowany: @Ciphertext</p>
+            </div>
+        </div>
+        <div class="content-element-x">
+            <h2>Deszyfrator</h2>
+            <div class="mb-3">
+                <label for="Ciphertext">Text Zaszyfrowany</label>
+                <input class="form-control" id="Ciphertext" @bind="Ciphertext" />
+            </div>
+            <div class="mb-3">
+                <label for="KeyWord">Slowo klucz</label>
+                <input class="form-control" id="KeyWord" @bind="KeyWord" />
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" @onclick="Decrypt">Deszyfruj</button>
+            </div>
+            <div class="mb-3">
+                <p>Text deszyfrowany: @Plaintext</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-element">
+        <h2>Tabula Recta</h2>
+        <div class="mb-3 tabula-recta">
+            <TabulaRecta />
+        </div>
+    </div>
+
+</div>
+
+@code {
+    public string KeyWord { get; set; } = "";
+    public string Plaintext { get; set; } = "";
+    public string Ciphertext { get; set; } = "";
+
+    public void Encrypt()
+    {
+        string encryptedString = "";
+        string cleanedString = SzyfrLib.ClearString(Plaintext);
+        string cleanedKey = SzyfrLib.ClearString(KeyWord);
+
+        while (cleanedKey.Length < cleanedString.Length)
+        {
+            cleanedKey += SzyfrLib.Alphabet;
+        }
+
+        for (int i = 0; i < cleanedString.Length; i++)
+        {
+            char c1 = cleanedString[i];
+            char c2 = cleanedKey[i];
+
+            int index1 = Array.IndexOf(SzyfrLib.AllowedChars, c1);
+            int index2 = Array.IndexOf(SzyfrLib.AllowedChars, c2);
+
+            encryptedString += SzyfrLib.TabulaRecta[index1, index2];
+        }
+
+        Ciphertext = encryptedString;
+    }
+
+    public void Decrypt()
+    {
+        string decryptedString = "";
+        string cleanedString = SzyfrLib.ClearString(Ciphertext);
+        string cleanedKey = SzyfrLib.ClearString(KeyWord);
+
+        while (cleanedKey.Length < cleanedString.Length)
+        {
+            cleanedKey += SzyfrLib.Alphabet;
+        }
+
+        for (int i = 0; i < cleanedString.Length; i++)
+        {
+            char c1 = cleanedString[i];
+            char c2 = cleanedKey[i];
+
+            int index1 = Array.IndexOf(SzyfrLib.AllowedChars, c1);
+            int index2 = Array.IndexOf(SzyfrLib.AllowedChars, c2);
+
+            int decryptedIndex = (index1 - index2 + SzyfrLib.Len) % SzyfrLib.Len;
+            decryptedString += SzyfrLib.AllowedChars[decryptedIndex];
+
+        }
+
+        Plaintext = decryptedString;
+    }
+}
